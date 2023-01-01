@@ -1,0 +1,79 @@
+function apartmentHunting(blocks, reqs) {
+
+  // Write your code here.
+  	// ###### ALL THE STEPS MENTIONED HERE ARE EXPLAINED INTO THE EXPLANATION FILE ######
+	list2 = []
+	list1 = []
+	list3 = []
+	list4 = []
+	indexes = []
+	let sml = 0
+	let str1 = ''
+	
+	for (let i = 0; i < blocks.length; i++) { // for all blocks
+	  for (let j = 0; j < reqs.length; j++) { // for all reqs
+	    if ( Object.prototype.hasOwnProperty.call(blocks[i], reqs[j]) && blocks[i][reqs[j]] === true) { // ################# Step 1 ##################
+	      list2.push(0)
+	    } 
+	    else if (Object.prototype.hasOwnProperty.call(blocks[i], reqs[j]) && blocks[i][reqs[j]] === false) { // ############### Step 2 ################
+	      for (let k = 0; k < blocks.length; k++) {
+		if (blocks[k][reqs[j]] === true) {
+		  if (sml === 0) {
+		    sml = Math.abs(i-k)
+		  } else if (Math.abs(i-k) < sml) {
+		    sml = Math.abs(i-k)
+		  }
+		}
+	      }
+	      list2.push(sml)
+	      sml = 0
+	    }
+	  }
+	  list1.push(list2) // ################ Step 3 ################
+	  list2 = []
+	}
+
+	// ###################### Step 4 #####################
+	
+	for(let i = 0; i < list1.length; i++) {
+	  let result = list1[i].reduce((a,b) => {
+	    return a + b;
+	  });
+	  list3.push(result)
+	}
+
+	// #################### Step 5 #####################
+	
+	let mini = Math.min(...list3)
+	for (i = 0; i < list3.length; i++) {
+	  if (list3[i] === mini) {
+	   indexes.push(i) 
+	  }
+	}
+
+	// ##################### Step 6 ######################
+	
+	if (indexes.length === 1) {
+	  return indexes[0]
+	} else {
+	  for (i = 0; i < indexes.length; i++) {
+	    d = new Set(list1[indexes[i]])
+	    a = (Array.from(d)).sort()
+	    for (j = 0; j < a.length; j++) {
+	      str1 += a[j].toString()
+	    }
+	    list4.push(str1)
+	    str1 = ''
+	  }
+	}
+
+	// ####################### Step 7 #######################
+	
+	let sorted = list4.slice()
+	sorted.sort()
+	let idx = list4.indexOf(sorted[0])
+	return indexes[idx]
+	}
+
+// Do not edit the line below.
+exports.apartmentHunting = apartmentHunting;
