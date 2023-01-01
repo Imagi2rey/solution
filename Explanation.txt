@@ -1,0 +1,79 @@
+############################## APPROACH ###################################
+
+Step 1. For every block check if it satisfy all reqs,
+	If it satisfy than push 0 distance into another array,
+	like if for block 0 : {"gym": true, "school":true, "store":true}
+	push 0 one by one in list2. At the end list2 will be [0,0,0]
+	
+	If any reqs for current block is false then move to step 2
+	
+Step 2. As the current block don't satisfy all reqs so we need to check other 
+	blocks which satisfy remaining reqs. Here we need to find the block 
+	which satisfy any of remiaing reqs and have the smallest distance from 
+	current block (the one we are trying to find reqs for)
+	If found any block then push it's index or distance from the host block
+	into the list2 
+	
+	when we satisfied all the requirements for one block and find the
+	distances of nearest block which satisfy remaining reqs then move to
+	step 3 
+	
+Step 3. Push list2 array into list1 (which is empty in the beginning) when one 
+	reqs are satisfied ,
+	
+*** Keep repeating Step 1-3 for all other blocks, when finished then list1
+    array will look like something this [[1,0,4],[0,1,4],[0,0,2],[1,0,1],
+    [2,0,0]] depend upon number of blocks and reqs. Now move to Step 4
+
+Step 4. Now for all the items inside list1 (which are arrays) find individual
+	item sum and push into list3 array.
+	We will use this sum for finding the block with nearest distances.
+	-> list3 will look like something this: [5, 5, 2, 2, 2] 
+	Move to Step 5
+	
+Step 5. Now we will find the min sum from list3. We will also check if sum of 
+	other elements is also equal to min sum. If so then push all of their 
+	respective index according to list3 into indexes array.
+	Move to Step 6
+	
+Step 6. 1. If our indexes array contains only one item it means there is only
+	   one block which have the samllest sum. 
+	   Return the index of this block
+	2. Else If there are more than one block which have equal min sum than 
+	   we will find out which of them have shortest distance to all reqs.
+	   
+	   There are many ways to do this but for our solution we implemented
+	   like this ->
+	   
+	   For all the index in indexes array sort items of list1 and remove 
+	   duplicates (only in the item) and save them in variable a.
+	   'a' will look like this : [[0,2],[0,1],[0,2]]
+	   
+	   Convert items in a into string and push that string into list4
+	   list4 will look like this -> ['02','01','02']
+	   
+	   Move to Step 7.
+	   
+Step 7. Now find the smallest items from list4 and find it's index. Use this 
+	index to retrieve the index from indexes array. Which will gave the 
+	index of block with all reqs with shortest distances.
+	
+	Note: list4 will return the first index if there more then one block
+	      with same minimum distance.
+	
+	return this index.
+	
+	That's it!!!
+	
+	
+
+There are many ways we can solve this problem and also optimize this solution.
+This solution is checked only for a certain block array and reqs array, but i hope it will work for other block and reqs arrays.
+
+Thanks for reading. 
+	   
+	   
+	   
+	   
+
+
