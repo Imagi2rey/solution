@@ -68,7 +68,7 @@ Step 7. Now find the smallest items from list4 and find it's index. Use this
 	
 
 There are many ways we can solve this problem and also optimize this solution.
-This solution is checked only for a certain block array and reqs array, but i hope it will work for other block and reqs arrays.
+This solution is tested for a limited block arrays and reqs arrays, but i hope it will also work for other blocks and reqs.
 
 Thanks for reading. 
 	   
